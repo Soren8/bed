@@ -115,6 +115,12 @@ legend{font-weight:800;padding:0 .4rem}
 fieldset label{display:flex;gap:.5rem;align-items:flex-start;padding:.32rem 0;cursor:pointer}
 fieldset input[type="radio"]{margin-top:.3rem;accent-color:var(--orange)}
 #custom-base{width:7em;padding:.25rem .5rem;border:1px solid var(--line);border-radius:8px}
+.custom-base-row{padding:.32rem 0}
+.custom-base-row label:not(.sr-only){display:inline-flex;gap:.5rem;align-items:flex-start;cursor:pointer}
+.custom-base-input{display:inline-flex;gap:.25rem;align-items:center;margin-left:.25rem}
+.field-error{color:#93380A;font-size:.85rem;font-weight:600;margin:.3rem 0 0}
+.field-error[hidden]{display:none}
+#custom-base[aria-invalid="true"]{border-color:#93380A;outline:2px solid #E8C48F}
 .cover-check{margin:1rem 0;font-weight:600}
 .calc-out{background:#2B2419;color:#F7EFDD;border-radius:12px;padding:1rem 1.2rem}
 .calc-out dl{margin:0}

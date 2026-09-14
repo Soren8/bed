@@ -4,37 +4,42 @@
 <rect width="900" height="520" rx="18" fill="#FFFDF7"/>
 <rect x="20" y="16" width="860" height="488" rx="14" fill="none" stroke="#E4D7BE" stroke-width="2"/>
 <text x="450" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="bold" fill="#211C14">Low king base &#183; outside 76&#8243; &#215; 80&#8243; &#183; 19 boards</text>
-<!-- TOP VIEW frame -->
+<!-- TOP VIEW frame: proportional scale 4.75px/in. Outer 76in x 80in = 361 x 380px.
+     Rails on edge show 1.5in thickness (7.12px). Slats flat show 3.5in width (16.62px).
+     14 slats x 3.5in = 49in; leftover 31in over 13 gaps = 2.3846in each (11.33px).
+     First/last slats flush with frame ends. -->
 <g font-family="system-ui,sans-serif" font-size="13" fill="#211C14">
   <!-- outer -->
-  <rect x="60" y="80" width="480" height="380" rx="6" fill="#F3EAD6" stroke="#6E4E22" stroke-width="3"/>
-  <!-- side rails -->
-  <rect x="60" y="80" width="22" height="380" fill="#B9884E" stroke="#6E4E22" stroke-width="2"/>
-  <rect x="518" y="80" width="22" height="380" fill="#B9884E" stroke="#6E4E22" stroke-width="2"/>
-  <!-- end rails -->
-  <rect x="82" y="80" width="436" height="22" fill="#C99A5B" stroke="#6E4E22" stroke-width="2"/>
-  <rect x="82" y="438" width="436" height="22" fill="#C99A5B" stroke="#6E4E22" stroke-width="2"/>
-  <!-- center beam -->
-  <rect x="289" y="102" width="22" height="336" fill="#8A6132" stroke="#5C3F1C" stroke-width="2"/>
-  <!-- slats across -->
-  <g fill="#DDB271" stroke="#6E4E22" stroke-width="1.6">
-    <rect x="60" y="112" width="480" height="14" rx="2"/>
-    <rect x="60" y="138" width="480" height="14" rx="2"/>
-    <rect x="60" y="164" width="480" height="14" rx="2"/>
-    <rect x="60" y="190" width="480" height="14" rx="2"/>
-    <rect x="60" y="216" width="480" height="14" rx="2"/>
-    <rect x="60" y="242" width="480" height="14" rx="2"/>
-    <rect x="60" y="268" width="480" height="14" rx="2"/>
-    <rect x="60" y="294" width="480" height="14" rx="2"/>
-    <rect x="60" y="320" width="480" height="14" rx="2"/>
-    <rect x="60" y="346" width="480" height="14" rx="2"/>
-    <rect x="60" y="372" width="480" height="14" rx="2"/>
-    <rect x="60" y="398" width="480" height="14" rx="2"/>
+  <rect x="120" y="80" width="361" height="380" rx="6" fill="#F3EAD6" stroke="#6E4E22" stroke-width="3"/>
+  <!-- side rails (1.5in thick, 80in long) -->
+  <rect x="120" y="80" width="7.12" height="380" fill="#B9884E" stroke="#6E4E22" stroke-width="1.5"/>
+  <rect x="473.88" y="80" width="7.12" height="380" fill="#B9884E" stroke="#6E4E22" stroke-width="1.5"/>
+  <!-- end rails (73in between sides, 1.5in thick) -->
+  <rect x="127.12" y="80" width="346.76" height="7.12" fill="#C99A5B" stroke="#6E4E22" stroke-width="1.5"/>
+  <rect x="127.12" y="452.88" width="346.76" height="7.12" fill="#C99A5B" stroke="#6E4E22" stroke-width="1.5"/>
+  <!-- center beam (77in between ends, 1.5in thick) -->
+  <rect x="296.94" y="87.12" width="7.12" height="365.76" fill="#8A6132" stroke="#5C3F1C" stroke-width="1.5"/>
+  <!-- slats across (76in long, 3.5in wide, flush ends, 2.3846in gaps) -->
+  <g fill="#DDB271" stroke="#6E4E22" stroke-width="1.2">
+    <rect x="120" y="80" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="107.95" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="135.9" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="163.86" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="191.81" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="219.76" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="247.71" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="275.66" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="303.62" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="331.57" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="359.52" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="387.47" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="415.42" width="361" height="16.62" rx="2"/>
+    <rect x="120" y="443.38" width="361" height="16.62" rx="2"/>
   </g>
-  <text x="300" y="74" text-anchor="middle" font-size="12" fill="#5A5145">TOP VIEW &#183; 14 slats 76&#8243; flat &#183; gaps &#8776;2.39&#8243;</text>
-  <text x="52" y="280" text-anchor="end" font-size="12" fill="#5A5145" transform="rotate(-90 52,280)">80&#8243; sides</text>
-  <text x="300" y="482" text-anchor="middle" font-size="12" fill="#5A5145">76&#8243; outside &#183; ends 73&#8243; between sides &#183; center 77&#8243;</text>
-  <text x="300" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFDF7" transform="rotate(90 300,270)">CENTER</text>
+  <text x="300.5" y="74" text-anchor="middle" font-size="12" fill="#5A5145">TOP VIEW &#183; 14 slats 76&#8243; flat &#183; gaps &#8776;2.39&#8243;</text>
+  <text x="112" y="270" text-anchor="end" font-size="12" fill="#5A5145" transform="rotate(-90 112,270)">80&#8243; sides</text>
+  <text x="300.5" y="482" text-anchor="middle" font-size="12" fill="#5A5145">76&#8243; outside &#183; ends 73&#8243; between sides &#183; center 77&#8243;</text>
+  <text x="300.5" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFDF7" stroke="#5C3F1C" stroke-width="3" paint-order="stroke" transform="rotate(90 300.5,270)">CENTER</text>
 </g>
 <!-- SIDE SECTION -->
 <g font-family="system-ui,sans-serif">

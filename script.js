@@ -34,6 +34,16 @@ function val(name) {
   return el ? el.value : null;
 }
 
+function customBaseState() {
+  var input = document.getElementById('custom-base');
+  var raw = input ? input.value.trim() : '';
+  if (raw === '') return { valid: false, error: 'Enter a custom base amount in dollars.' };
+  var c = Number(raw);
+  if (!isFinite(c)) return { valid: false, error: 'Enter a finite number for the custom base amount.' };
+  if (c < 0) return { valid: false, error: 'Custom base amount must be $0 or more.' };
+  return { valid: true, value: c, error: '' };
+}
+
 function updateCalc() {
   var coreKey = val('core') || 'lux6';
   var topKey = val('topper') || 'sweet';
@@ -41,19 +51,39 @@ function updateCalc() {
   var core = CORES[coreKey];
   var top = TOPPERS[topKey];
   var base = BASES[baseKey];
+  var baseInvalid = false;
+  var errEl = document.getElementById('custom-base-error');
+  var customInput = document.getElementById('custom-base');
   if (baseKey === 'custom') {
-    var c = parseFloat(document.getElementById('custom-base').value);
-    base = (isFinite(c) && c >= 0) ? c : 0;
+    var st = customBaseState();
+    if (!st.valid) {
+      baseInvalid = true;
+      base = NaN;
+      if (errEl) { errEl.textContent = st.error; errEl.hidden = false; }
+      if (customInput) customInput.setAttribute('aria-invalid', 'true');
+    } else {
+      base = st.value;
+      if (errEl) { errEl.textContent = ''; errEl.hidden = true; }
+      if (customInput) customInput.removeAttribute('aria-invalid');
+    }
+  } else {
+    if (errEl) { errEl.textContent = ''; errEl.hidden = true; }
+    if (customInput) customInput.removeAttribute('aria-invalid');
   }
   var ownCover = document.getElementById('own-cover').checked;
   var cover = (core.coverIncluded || ownCover) ? 0 : COVER_PRICE;
-  var total = core.price + top.price + cover + base;
 
   document.getElementById('out-core').textContent = money(core.price) + ' · ' + core.label;
   document.getElementById('out-topper').textContent = money(top.price) + ' · ' + top.label;
   document.getElementById('out-cover').textContent = money(cover) + (core.coverIncluded ? ' · built-in' : (ownCover ? ' · already own' : ' · knit cover'));
-  document.getElementById('out-base').textContent = money(base);
-  document.getElementById('out-total').textContent = money(total);
+  if (baseInvalid) {
+    document.getElementById('out-base').textContent = '—';
+    document.getElementById('out-total').textContent = '—';
+  } else {
+    var total = core.price + top.price + cover + base;
+    document.getElementById('out-base').textContent = money(base);
+    document.getElementById('out-total').textContent = money(total);
+  }
 }
 
 function initFallbacks() {
@@ -84,7 +114,17 @@ function initFilters() {
 document.addEventListener('DOMContentLoaded', function () {
   initFallbacks();
   initFilters();
-  document.getElementById('calc-form').addEventListener('change', updateCalc);
-  document.getElementById('calc-form').addEventListener('input', updateCalc);
+  var form = document.getElementById('calc-form');
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  form.addEventListener('change', updateCalc);
+  form.addEventListener('input', updateCalc);
+  var customInput = document.getElementById('custom-base');
+  if (customInput) {
+    customInput.addEventListener('input', function () {
+      var radio = document.querySelector('input[name="base"][value="custom"]');
+      if (radio && !radio.checked) { radio.checked = true; }
+      updateCalc();
+    });
+  }
   updateCalc(); // default: 193.99 + 74.93 + 64.99 + 96.00 = 429.91
 });
