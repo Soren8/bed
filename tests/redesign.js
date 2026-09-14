@@ -27,9 +27,16 @@ function check(name, cond, detail) {
       await page.goto(url, { waitUntil: 'load' });
       await page.waitForSelector('#picks');
 
-      // Above fold: first pick total visible without scrolling (desktop strict, mobile near-top)
+      // Above fold: first pick total visible near the top (desktop strict, mobile near-top).
+      // Intentional layout shift (Sept 2026 feedback): the mandated bigger hero
+      // diagram (display 135px -> 260px desktop / 90px -> 220px mobile, labels
+      // redrawn at 20px+ viewBox scale) plus the mandated latex firmness clause
+      // and consensus-testing caveat in #logic moved the first pick total from
+      // ~760px to ~949px on desktop and ~1375px to ~1638px on mobile. Limits
+      // below encode the new intentional layout; picks still follow immediately
+      // after the hero + logic block (no bulk added above picks).
       const tops = await page.evaluate(() => [...document.querySelectorAll('.pick-total')].map(el => el.getBoundingClientRect().top));
-      const limit = vp.width >= 1000 ? vp.height : 1400;
+      const limit = vp.width >= 1000 ? 1050 : 1750;
       check(`[${tag}] picks actionable near top`, tops.length === 3 && tops[0] < limit, `tops=${JSON.stringify(tops)}`);
 
       // Thickness filter: 2" shows only thickness=2
@@ -45,11 +52,19 @@ function check(name, cond, detail) {
       await page.waitForTimeout(80);
 
       // Build-this applies calculator options.
-      // Intentional pick change (core-longevity restructure): picks are now
-      // latex/supersoft2, valevag/ego2, hq6/ego2. Third pick: hq6 + ego2 + low
-      // = 250.99+49.49+64.99+96 = 461.47 (was lux6 + ego2 + low = 404.47).
+      // Intentional pick reorder (cheapest-defensible-first, Sept 2026 feedback):
+      // Pick 1 = hq6/ego2 (Best value), Pick 2 = valevag/ego2, Pick 3 = latex/supersoft2.
+      // Third pick is now latex + supersoft2 + low = 1249.00+64.99+0+96 = 1409.99
+      // (was hq6 + ego2 + low = 461.47 before the reorder).
       const builds = await page.$$('button[data-build]');
       check(`[${tag}] three build buttons`, builds.length === 3, `found=${builds.length}`);
+      // Picks are ordered cheapest-defensible-first: HQ, coil, latex.
+      const pickTotals = await page.evaluate(() => [...document.querySelectorAll('.pick-total')].map(el => el.textContent.trim()));
+      check(`[${tag}] picks ordered cheapest first`, pickTotals.length === 3 && pickTotals[0].includes('437.47') && pickTotals[1].includes('620.49') && pickTotals[2].includes('1,385.99'), JSON.stringify(pickTotals));
+      const firstFlag = await page.evaluate(() => (document.querySelector('.pick .flag') || {}).textContent || '');
+      check(`[${tag}] first pick flagged best value`, /best value/i.test(firstFlag), firstFlag);
+      const latexCardText = await page.evaluate(() => [...document.querySelectorAll('.pick')].map(el => el.innerText).join('\n---\n'));
+      check(`[${tag}] latex pick justifies cost per year`, /\$70.*\$118\/yr/.test(latexCardText) && /estimate, not promise/i.test(latexCardText), latexCardText.slice(0, 300));
       await builds[2].click();
       await page.waitForTimeout(300);
       const st = await page.evaluate(() => ({
@@ -59,7 +74,18 @@ function check(name, cond, detail) {
         total: document.getElementById('out-total').textContent.trim(),
         note: document.getElementById('calc-note').textContent
       }));
-      check(`[${tag}] build-this sets calculator`, st.core === 'hq6' && st.topper === 'ego2' && st.base === 'low' && st.total === '$461.47', JSON.stringify(st));
+      check(`[${tag}] build-this sets calculator`, st.core === 'latex' && st.topper === 'supersoft2' && st.base === 'low' && st.total === '$1409.99', JSON.stringify(st));
+      // First pick (Best value) still wires correctly: hq6 + ego2 + low = 250.99+49.49+64.99+96 = 461.47.
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await builds[0].click();
+      await page.waitForTimeout(300);
+      const st0 = await page.evaluate(() => ({
+        core: (document.querySelector('input[name="core"]:checked') || {}).value,
+        topper: (document.querySelector('input[name="topper"]:checked') || {}).value,
+        base: (document.querySelector('input[name="base"]:checked') || {}).value,
+        total: document.getElementById('out-total').textContent.trim()
+      }));
+      check(`[${tag}] best-value build sets calculator`, st0.core === 'hq6' && st0.topper === 'ego2' && st0.base === 'low' && st0.total === '$461.47', JSON.stringify(st0));
 
       // Privacy: no personal anecdote text anywhere (incl SVG docs fetched)
       const bodyText = await page.evaluate(() => document.body.innerText);
