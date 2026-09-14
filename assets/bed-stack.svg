@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="bsT bsD">
+<title id="bsT">Exploded king bed stack</title>
+<desc id="bsD">Four separated layers: cream soft topper, rust knit cover band, terracotta firm foam core, and wooden slatted base, with dashed alignment guides and dimension labels.</desc>
+<rect width="640" height="520" rx="18" fill="#FFFDF7"/>
+<rect x="24" y="20" width="592" height="480" rx="14" fill="none" stroke="#E4D7BE" stroke-width="2"/>
+<!-- dashed guides -->
+<g stroke="#B9A888" stroke-width="1.5" stroke-dasharray="7 6">
+  <line x1="120" y1="60" x2="120" y2="470"/>
+  <line x1="520" y1="60" x2="520" y2="470"/>
+</g>
+<!-- topper -->
+<g>
+  <polygon points="90,90 550,90 500,150 140,150" fill="#F7EBD2" stroke="#C9B78F" stroke-width="2"/>
+  <polygon points="140,150 500,150 500,178 140,178" fill="#EFDFC0" stroke="#C9B78F" stroke-width="2"/>
+  <text x="320" y="128" text-anchor="middle" font-family="Georgia,serif" font-size="21" font-weight="bold" fill="#5A3E14">4&#8243; soft topper</text>
+  <text x="320" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#7A6A4F">comfort layer &#183; replaceable</text>
+</g>
+<!-- gap arrow -->
+<g font-family="system-ui,sans-serif" font-size="12" fill="#93380A">
+  <text x="560" y="200" text-anchor="middle"> slip</text>
+  <line x1="548" y1="182" x2="548" y2="216" stroke="#BC4E12" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><circle cx="4" cy="4" r="3" fill="#BC4E12"/></marker></defs>
+</g>
+<!-- cover band -->
+<g>
+  <polygon points="100,218 540,218 500,268 140,268" fill="none" stroke="#BC4E12" stroke-width="3" stroke-dasharray="10 6"/>
+  <text x="320" y="248" text-anchor="middle" font-family="Georgia,serif" font-size="19" font-weight="bold" fill="#93380A">knit cover &#183; $64.99</text>
+</g>
+<!-- core -->
+<g>
+  <polygon points="90,282 550,282 500,352 140,352" fill="#C4551A" stroke="#93380A" stroke-width="2"/>
+  <polygon points="140,352 500,352 500,392 140,392" fill="#A8430F" stroke="#93380A" stroke-width="2"/>
+  <text x="320" y="326" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#FFF3E2">6&#8243; firm core &#183; 50 ILD</text>
+  <text x="320" y="378" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#FFDDBB">support layer &#183; 76&#215;80 king</text>
+</g>
+<!-- base -->
+<g>
+  <g fill="#B9884E" stroke="#6E4E22" stroke-width="2">
+    <rect x="110" y="420" width="60" height="18" rx="3"/>
+    <rect x="185" y="420" width="60" height="18" rx="3"/>
+    <rect x="260" y="420" width="60" height="18" rx="3"/>
+    <rect x="335" y="420" width="60" height="18" rx="3"/>
+    <rect x="410" y="420" width="60" height="18" rx="3"/>
+  </g>
+  <rect x="95" y="438" width="450" height="16" rx="4" fill="#8A6132" stroke="#5C3F1C" stroke-width="2"/>
+  <text x="320" y="478" text-anchor="middle" font-family="Georgia,serif" font-size="18" font-weight="bold" fill="#2F6138">floor-supported 2&#215;4 slat base</text>
+</g>
+<text x="320" y="502" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8A7C64">each layer lifts off &#183; replace only what wears out</text>
+</svg>

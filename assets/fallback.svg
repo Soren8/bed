@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="fbT">
+<title id="fbT">Mattress illustration placeholder</title>
+<rect width="400" height="300" rx="16" fill="#F3EAD6"/>
+<rect x="14" y="14" width="372" height="272" rx="12" fill="none" stroke="#C9B78F" stroke-width="2"/>
+<g>
+  <polygon points="80,110 320,110 290,160 110,160" fill="#F7EBD2" stroke="#8A7C64" stroke-width="2"/>
+  <polygon points="110,160 290,160 290,190 110,190" fill="#C4551A" stroke="#93380A" stroke-width="2"/>
+  <g fill="#B9884E" stroke="#6E4E22" stroke-width="1.5">
+    <rect x="95" y="205" width="40" height="12" rx="2"/>
+    <rect x="145" y="205" width="40" height="12" rx="2"/>
+    <rect x="195" y="205" width="40" height="12" rx="2"/>
+    <rect x="245" y="205" width="40" height="12" rx="2"/>
+  </g>
+</g>
+<text x="200" y="252" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="#5A3E14">Photo unavailable</text>
+<text x="200" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#7A6A4F">local illustration shown instead</text>
+</svg>
