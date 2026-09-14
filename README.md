@@ -1,6 +1,6 @@
-# Smart modular king beds — static comparison site
+# Modular King — static comparison site
 
-Dependency-free static site (HTML + CSS + vanilla JS). No build step, no npm packages.
+Dark, dependency-free static site (HTML + CSS + vanilla JS). No build step, no npm packages. Compact header + three priced picks above the fold; DIY/method/watchlist live in `<details>` disclosure sections.
 
 ## Local preview
 
@@ -23,13 +23,10 @@ python3 -m http.server 8123 --bind 127.0.0.1
 All links/asset paths are relative, so the site also works from a sub-path
 or opened directly from disk (except `fetch`-based features — there are none).
 
-## Browser test (calculator custom base)
+## Browser tests
 
-Focused Playwright check for the stack calculator: separate custom-base
-labels, typing selects the custom radio, invalid/empty custom shows an
-error with no `$0.00` subtotal, no arbitrary max cap, featured math, and
-Enter does not reset state. Runs at desktop + 390px widths. No npm install;
-uses an externally installed `playwright-core`.
+- `tests/calculator-custom-base.js` — stack calculator custom-base behavior (permanent, must pass).
+- `tests/redesign.js` — picks above the fold, topper thickness (1/2/4) filters, "Build this" applying calculator options, no personal-anecdote text in page or SVGs, no horizontal overflow, visible keyboard focus, zero console errors; saves screenshots to `/tmp/opencode/`.
 
 ```sh
 cd /workspace/bed
@@ -37,13 +34,15 @@ NODE_PATH="<dir-with-playwright-core>" \
 CHROME_HEADLESS_SHELL="<path-to-chrome-headless-shell>" \
 LD_LIBRARY_PATH="<sysroot-lib-dirs>" FONTCONFIG_FILE="<fonts.conf>" \
 node tests/calculator-custom-base.js
+# same env, plus BED_URL=http://127.0.0.1:8123/index.html when served:
+node tests/redesign.js
 ```
 
 Optional overrides (no hardcoded browser paths in the test itself):
 
 - `BED_URL` — page to test (default: local `index.html` via `file://`).
 - `CHROME_HEADLESS_SHELL` — Chromium executable (omit to use Playwright default).
-- `VIEWPORTS` — e.g. `VIEWPORTS=1280x800` or `VIEWPORTS=390x800`.
+- `VIEWPORTS` — calculator test only, e.g. `VIEWPORTS=1280x800` or `VIEWPORTS=390x800` (redesign test uses fixed 1280x800 / 390x844 + full-page 1440).
 
 ## Snapshot
 

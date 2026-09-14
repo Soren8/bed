@@ -6,6 +6,8 @@ var CORES = {
   hq4:  { label: 'Lux-HQ 4"', price: 167.99, coverIncluded: false },
   hq5:  { label: 'Lux-HQ 5"', price: 208.99, coverIncluded: false },
   hq6:  { label: 'Lux-HQ 6"', price: 250.99, coverIncluded: false },
+  valevag: { label: 'IKEA VALEVAG extra-firm', price: 499.00, coverIncluded: true },
+  latex: { label: 'Latex Essential 6"', price: 1249.00, coverIncluded: true },
   ikea: { label: 'IKEA ASBYGDA firm', price: 349.00, coverIncluded: true }
 };
 var TOPPERS = {
@@ -111,9 +113,54 @@ function initFilters() {
   });
 }
 
+function initThicknessFilters() {
+  var btns = document.querySelectorAll('button[data-thickness]');
+  var cards = document.querySelectorAll('#topper-grid .product[data-thickness]');
+  if (!btns.length || !cards.length) return;
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      btn.setAttribute('aria-pressed', 'true');
+      var f = btn.getAttribute('data-thickness');
+      cards.forEach(function (c) {
+        var t = c.getAttribute('data-thickness');
+        c.classList.toggle('hidden', f !== 'all' && t !== f);
+      });
+    });
+  });
+}
+
+function initBuildButtons() {
+  document.querySelectorAll('[data-build]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var core = btn.getAttribute('data-core');
+      var topper = btn.getAttribute('data-topper');
+      var base = btn.getAttribute('data-base');
+      function check(name, value) {
+        if (!value) return;
+        var el = document.querySelector('input[name="' + name + '"][value="' + value + '"]');
+        if (el && !el.disabled) el.checked = true;
+      }
+      check('core', core);
+      check('topper', topper);
+      check('base', base);
+      updateCalc();
+      var calc = document.getElementById('calculator');
+      if (calc) calc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var note = document.getElementById('calc-note');
+      if (note) {
+        var c = CORES[core], t = TOPPERS[topper];
+        if (c && t) note.textContent = 'Applied: ' + c.label + ' + ' + t.label + ' + cover + base. ' + document.getElementById('out-total').textContent + ' estimated; excludes tax, transport, tools, shipping.';
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initFallbacks();
   initFilters();
+  initThicknessFilters();
+  initBuildButtons();
   var form = document.getElementById('calc-form');
   form.addEventListener('submit', function (e) { e.preventDefault(); });
   form.addEventListener('change', updateCalc);
