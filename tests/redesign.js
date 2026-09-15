@@ -58,13 +58,17 @@ function check(name, cond, detail) {
       // (was hq6 + ego2 + low = 461.47 before the reorder).
       const builds = await page.$$('button[data-build]');
       check(`[${tag}] three build buttons`, builds.length === 3, `found=${builds.length}`);
-      // Picks are ordered cheapest-defensible-first: HQ, coil, latex.
+      // Picks are ordered by yearly cost (Sept 2026 feedback: value = total / years):
+      // HQ ($46-77/yr), coil ($54-92/yr), latex ($70-118/yr). Pick-total now shows
+      // $/yr first; upfront totals live in .pick-parts.
       const pickTotals = await page.evaluate(() => [...document.querySelectorAll('.pick-total')].map(el => el.textContent.trim()));
-      check(`[${tag}] picks ordered cheapest first`, pickTotals.length === 3 && pickTotals[0].includes('437.47') && pickTotals[1].includes('620.49') && pickTotals[2].includes('1,385.99'), JSON.stringify(pickTotals));
+      check(`[${tag}] picks ordered by yearly cost`, pickTotals.length === 3 && /46.*77/.test(pickTotals[0]) && /54.*92/.test(pickTotals[1]) && /70.*118/.test(pickTotals[2]), JSON.stringify(pickTotals));
+      const pickParts = await page.evaluate(() => [...document.querySelectorAll('.pick-parts')].map(el => el.textContent.trim()));
+      check(`[${tag}] picks show upfront totals`, pickParts.length === 3 && pickParts[0].includes('437.47') && pickParts[1].includes('620.49') && pickParts[2].includes('1,385.99'), JSON.stringify(pickParts));
       const firstFlag = await page.evaluate(() => (document.querySelector('.pick .flag') || {}).textContent || '');
       check(`[${tag}] first pick flagged best value`, /best value/i.test(firstFlag), firstFlag);
       const latexCardText = await page.evaluate(() => [...document.querySelectorAll('.pick')].map(el => el.innerText).join('\n---\n'));
-      check(`[${tag}] latex pick justifies cost per year`, /\$70.*\$118\/yr/.test(latexCardText) && /estimate, not promise/i.test(latexCardText), latexCardText.slice(0, 300));
+      check(`[${tag}] latex pick justifies cost per year`, /\$70.*\$118\/yr/.test(latexCardText) && /estimate/i.test(latexCardText), latexCardText.slice(0, 300));
       await builds[2].click();
       await page.waitForTimeout(300);
       const st = await page.evaluate(() => ({

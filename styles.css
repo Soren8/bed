@@ -176,7 +176,11 @@ footer p{color:var(--faint);font-size:.85rem;margin:0}
 }
 @media (max-width:560px){
   body{font-size:15px}
-  section{margin:1.1rem 0}
+  section{margin:.9rem 0}
+  .hero{padding:.6rem 0 0}
+  .hero-art img{max-height:150px}
+  .logic .fineprint{margin:.25rem 0}
+  .tick li{margin:.25rem 0}
   .card{padding:.95rem}
   .bar-inner{flex-wrap:wrap;gap:.4rem}
   .topnav{gap:.3rem}
