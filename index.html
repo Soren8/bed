@@ -34,7 +34,7 @@
       <p>Support core that outlives its comfort layer, cheap replaceable topper, plain cover, simple 2&times;4 base. Three priced stacks below.</p>
     </div>
     <figure class="hero-art">
-      <img src="assets/bed-stack.svg" alt="Stack order: soft topper on top, firm core enclosed in its cover, slatted wood base" width="380" height="274" fetchpriority="high">
+      <img src="assets/bed-stack.svg" alt="Stack order: soft topper and firm core together inside one shared knit cover, on a slatted wood base" width="380" height="274" fetchpriority="high">
     </figure>
   </section>
 
@@ -43,8 +43,8 @@
     <div class="card logic">
       <div class="logic-grid">
         <div><h3>Core = support</h3><p>The firm layer underneath. It must stay flat longer than anything above it.</p></div>
-        <div><h3>Topper = comfort</h3><p>The soft layer on top. It wears out first; plan to replace it.</p></div>
-        <div><h3>Cover = holds together</h3><p>A knit case around the core. Keeps the stack together; adds no support.</p></div>
+        <div><h3>Topper = comfort</h3><p>The soft layer on top, inside the same cover. It wears out first; plan to replace it.</p></div>
+        <div><h3>Cover = holds together</h3><p>One knit case around core and topper together. Order depth = core + topper (6+2 &rarr; 8&Prime;); adds no support.</p></div>
         <div><h3>Base = wood</h3><p>Flat wood slats that hold the weight. Lasts decades.</p></div>
       </div>
       <h3>How long materials last</h3>
@@ -128,7 +128,7 @@
         <button type="button" data-filter="simple" aria-pressed="false">Simplest</button>
       </div>
     </div>
-    <p class="section-sub">Sorted by rough yearly cost (midpoint total &divide; life range, estimate). Core + topper + cover ($64.99; latex and IKEA covers built in) + low DIY base materials ($72&ndash;$120). Own a flat supportive base? Subtract the base.</p>
+    <p class="section-sub">Sorted by rough yearly cost (midpoint total &divide; life range, estimate). Core + topper + one shared cover ($64.99 sized to core+topper; latex and IKEA covers built in) + low DIY base materials ($72&ndash;$120). Own a flat supportive base? Subtract the base.</p>
     <div class="table-scroll">
     <table class="stack-table" id="stack-table">
       <thead>
@@ -279,6 +279,14 @@
       </article>
 
       <article class="card product" data-thickness="2">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/81yjroQU+ZL._AC_SY300_SX300_QL70_ML2_.jpg" alt="Lucid 5-zone 2 inch gel memory foam king topper" loading="lazy" data-fallback="assets/fallback.svg"></div>
+        <p class="badges"><span>2&Prime; &middot; gel memory foam &middot; 3-yr warranty</span><strong>$74.99</strong></p>
+        <h3>Lucid 5-Zone 2&Prime;</h3>
+        <p class="stock">Amazon's Choice, 25,818 ratings; ships and sold by Amazon. Zoned pressure relief, use either side up.</p>
+        <p><a class="btn btn-small" href="https://www.amazon.com/dp/B07KRN95KH" target="_blank" rel="noopener">View listing</a></p>
+      </article>
+
+      <article class="card product" data-thickness="2">
         <div class="ph"><img src="https://m.media-amazon.com/images/I/81HoSSz8keL._AC_SY300_SX300_QL70_ML2_.jpg" alt="Linenspa 2 inch gel memory foam king topper" loading="lazy" data-fallback="assets/fallback.svg"></div>
         <p class="badges"><span>2&Prime; &middot; gel memory foam</span><strong>$79.99</strong></p>
         <h3>Linenspa 2&Prime; Gel</h3>
@@ -358,15 +366,17 @@
     </div>
     <div class="card cover-card">
       <div>
-        <h3>Knit cover &middot; $64.99</h3>
-        <p>Poly-cotton knit, King, every depth (3, 6, 8, 10&Prime;). <a href="https://www.thefoamfactory.com/mattress/polycottonknitcover.html" target="_blank" rel="noopener">Cover listing</a>. The knit cover encloses the foam core; the soft topper sits on top of the covered core. Bare foam + fabric cover is not sold as a fire-tested finished mattress; Foam Factory returns are restrictive.</p>
+        <h3>One knit cover &middot; $64.99 &middot; around core + topper</h3>
+        <p>Poly-cotton knit, King, every depth (3, 6, 8, 10&Prime;) at the same $64.99. <a href="https://www.thefoamfactory.com/mattress/polycottonknitcover.html" target="_blank" rel="noopener">Cover listing</a>. One case holds the whole stack: order the depth matching core + topper (6+2 &rarr; 8&Prime;; 6+4 &rarr; 10&Prime;; between sizes round up). The fitted sheet then wraps everything, so the topper needs no cover of its own &mdash; skip the $64.99 entirely and the sheets are the cover.</p>
+        <p><strong>Sheet fit:</strong> foam and latex stacks run 5&ndash;10&Prime; thick and fit standard fitted sheets (generally good to ~12&ndash;14&Prime;). Tallest combo here, coil 9.5&Prime; + 4&Prime; topper &asymp; 13.5&Prime;, wants deep-pocket sheets. Rule: measure core + topper, add ~2&Prime; tuck allowance, match the inch number on the sheet packaging &mdash; not just the &ldquo;deep pocket&rdquo; label.</p>
+        <p class="fineprint">Bare foam + fabric cover is not sold as a fire-tested finished mattress; Foam Factory returns are restrictive.</p>
       </div>
     </div>
   </section>
 
   <section id="calculator" aria-labelledby="calc-h">
     <h2 id="calc-h">Stack calculator</h2>
-    <p class="section-sub">Cover ($64.99) adds automatically unless the core includes one or you own one. Excludes tax, transport, tools, shipping.</p>
+      <p class="section-sub">One shared cover ($64.99, sized to core+topper) adds automatically unless the core includes one or sheets hold the stack. Excludes tax, transport, tools, shipping.</p>
     <form class="card calc" id="calc-form" novalidate>
       <div class="calc-grid">
         <fieldset>
@@ -392,6 +402,7 @@
           <label><input type="radio" name="topper" value="supersoft1"> Super Soft 1&Prime; &mdash; $32.99</label>
           <label><input type="radio" name="topper" value="supersoft2"> Super Soft 2&Prime; &mdash; $64.99</label>
           <label><input type="radio" name="topper" value="ego2"> EGO 2&Prime; &mdash; $49.49 <span class="mini">deal</span></label>
+          <label><input type="radio" name="topper" value="lucid2"> Lucid 5-zone 2&Prime; &mdash; $74.99</label>
           <label><input type="radio" name="topper" value="linenspa2"> Linenspa 2&Prime; &mdash; $79.99</label>
         </fieldset>
         <fieldset>
@@ -407,7 +418,7 @@
           </div>
         </fieldset>
       </div>
-      <p class="cover-check"><label><input type="checkbox" id="own-cover"> Already own a suitable cover &mdash; subtract $64.99</label></p>
+      <p class="cover-check"><label><input type="checkbox" id="own-cover"> Skip the cover &mdash; fitted sheets hold the stack ($0)</label></p>
       <div class="calc-out" aria-live="polite">
         <dl>
           <div><dt>Core</dt><dd id="out-core">$193.99</dd></div>
@@ -458,6 +469,7 @@
       <summary>Method &amp; fine print</summary>
       <ul class="tick">
         <li>Research synthesis, not hands-on testing of every combo. Firmness feel varies.</li>
+        <li>Trust rule: every pick is an established maker (IKEA, Latex Mattress Factory, Lucid, Sleep Innovations, Linenspa) or an Amazon listing shipped by Amazon with free 90-day returns. No-name brands live here only under Amazon's return policy.</li>
         <li>Outbound links are ordinary links (<code>rel="noopener"</code>). Totals are arithmetic on snapshot prices.</li>
         <li>Foam Factory: restrictive returns, no generous sleep trial; free contiguous-US shipping on qualifying $100+ orders.</li>
         <li>Bare foam + fabric cover is not verified here as a fire-tested finished mattress.</li>

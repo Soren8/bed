@@ -20,6 +20,7 @@ var TOPPERS = {
   supersoft1: { label: 'Super Soft 1"', price: 32.99 },
   supersoft2: { label: 'Super Soft 2"', price: 64.99 },
   ego2:   { label: 'EGO 2"', price: 49.49 },
+  lucid2: { label: 'Lucid 5-zone 2"', price: 74.99 },
   linenspa2: { label: 'Linenspa 2"', price: 79.99 }
 };
 var BASES = {
@@ -77,7 +78,7 @@ function updateCalc() {
 
   document.getElementById('out-core').textContent = money(core.price) + ' · ' + core.label;
   document.getElementById('out-topper').textContent = money(top.price) + ' · ' + top.label;
-  document.getElementById('out-cover').textContent = money(cover) + (core.coverIncluded ? ' · built-in' : (ownCover ? ' · already own' : ' · knit cover'));
+  document.getElementById('out-cover').textContent = money(cover) + (core.coverIncluded ? ' · built-in' : (ownCover ? ' · sheets only' : ' · knit cover'));
   if (baseInvalid) {
     document.getElementById('out-base').textContent = '—';
     document.getElementById('out-total').textContent = '—';
