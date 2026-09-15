@@ -174,7 +174,7 @@ function check(name, cond, detail) {
       check(`[${tag}] custom max handled consistently (honored or removed)`, maxOk, maxDetail);
 
       // 8. Enter in custom field must not reset calculator state (no form submit reload)
-      await page.check('input[name="core"][value="hq6"]');
+      await page.check('input[name="core"][value="valevag"]');
       await page.check('input[name="topper"][value="ego2"]');
       await page.check('input[name="base"][value="custom"]');
       await page.fill('#custom-base', '150');
@@ -190,9 +190,9 @@ function check(name, cond, detail) {
         base: (document.querySelector('input[name="base"]:checked') || {}).value || '',
         custom: document.getElementById('custom-base').value
       }));
-      // hq6(250.99)+ego2(49.49)+cover(64.99)+150 = 515.47
-      check(`[${tag}] Enter does not reset state`, afterEnter.total.trim() === '$515.47'
-        && afterEnter.core === 'hq6' && afterEnter.topper === 'ego2'
+      // valevag(499.00)+ego2(49.49)+cover built-in(0)+150 = 698.49
+      check(`[${tag}] Enter does not reset state`, afterEnter.total.trim() === '$698.49'
+        && afterEnter.core === 'valevag' && afterEnter.topper === 'ego2'
         && afterEnter.base === 'custom' && afterEnter.custom === '150',
         `before="${beforeEnter}" after=${JSON.stringify(afterEnter)}`);
 

@@ -52,23 +52,22 @@ function check(name, cond, detail) {
       await page.waitForTimeout(80);
 
       // Build-this applies calculator options.
-      // Intentional pick reorder (cheapest-defensible-first, Sept 2026 feedback):
-      // Pick 1 = hq6/ego2 (Best value), Pick 2 = valevag/ego2, Pick 3 = latex/supersoft2.
-      // Third pick is now latex + supersoft2 + low = 1249.00+64.99+0+96 = 1409.99
-      // (was hq6 + ego2 + low = 461.47 before the reorder).
+      // Intentional pick order (yearly cost, Sept 2026 feedback; Lux-HQ demoted
+      // to watchlist over its second-domain buy flow): Pick 1 = valevag/ego2
+      // (Best value), Pick 2 = latex/supersoft2, Pick 3 = lux6/ego2.
       const builds = await page.$$('button[data-build]');
       check(`[${tag}] three build buttons`, builds.length === 3, `found=${builds.length}`);
-      // Picks are ordered by yearly cost (Sept 2026 feedback: value = total / years):
-      // HQ ($46-77/yr), coil ($54-92/yr), latex ($70-118/yr). Pick-total now shows
-      // $/yr first; upfront totals live in .pick-parts.
+      // Picks ordered by yearly cost: coil ($54-92), latex ($70-118), Regular ($67-135).
       const pickTotals = await page.evaluate(() => [...document.querySelectorAll('.pick-total')].map(el => el.textContent.trim()));
-      check(`[${tag}] picks ordered by yearly cost`, pickTotals.length === 3 && /46.*77/.test(pickTotals[0]) && /54.*92/.test(pickTotals[1]) && /70.*118/.test(pickTotals[2]), JSON.stringify(pickTotals));
+      check(`[${tag}] picks ordered by yearly cost`, pickTotals.length === 3 && /54.*92/.test(pickTotals[0]) && /70.*118/.test(pickTotals[1]) && /67.*135/.test(pickTotals[2]), JSON.stringify(pickTotals));
       const pickParts = await page.evaluate(() => [...document.querySelectorAll('.pick-parts')].map(el => el.textContent.trim()));
-      check(`[${tag}] picks show upfront totals`, pickParts.length === 3 && pickParts[0].includes('437.47') && pickParts[1].includes('620.49') && pickParts[2].includes('1,385.99'), JSON.stringify(pickParts));
+      check(`[${tag}] picks show upfront totals`, pickParts.length === 3 && pickParts[0].includes('620.49') && pickParts[1].includes('1,385.99') && pickParts[2].includes('380.47'), JSON.stringify(pickParts));
       const firstFlag = await page.evaluate(() => (document.querySelector('.pick .flag') || {}).textContent || '');
       check(`[${tag}] first pick flagged best value`, /best value/i.test(firstFlag), firstFlag);
       const latexCardText = await page.evaluate(() => [...document.querySelectorAll('.pick')].map(el => el.innerText).join('\n---\n'));
       check(`[${tag}] latex pick justifies cost per year`, /\$70.*\$118\/yr/.test(latexCardText) && /estimate/i.test(latexCardText), latexCardText.slice(0, 300));
+      // Third pick (cheapest upfront) wires correctly: lux6 + ego2 + low =
+      // 193.99+49.49+64.99+96 = 404.47.
       await builds[2].click();
       await page.waitForTimeout(300);
       const st = await page.evaluate(() => ({
@@ -78,8 +77,9 @@ function check(name, cond, detail) {
         total: document.getElementById('out-total').textContent.trim(),
         note: document.getElementById('calc-note').textContent
       }));
-      check(`[${tag}] build-this sets calculator`, st.core === 'latex' && st.topper === 'supersoft2' && st.base === 'low' && st.total === '$1409.99', JSON.stringify(st));
-      // First pick (Best value) still wires correctly: hq6 + ego2 + low = 250.99+49.49+64.99+96 = 461.47.
+      check(`[${tag}] build-this sets calculator`, st.core === 'lux6' && st.topper === 'ego2' && st.base === 'low' && st.total === '$404.47', JSON.stringify(st));
+      // First pick (Best value) wires correctly: valevag + ego2 + low (cover
+      // built in) = 499.00+49.49+0+96 = 644.49.
       await page.evaluate(() => window.scrollTo(0, 0));
       await builds[0].click();
       await page.waitForTimeout(300);
@@ -89,11 +89,11 @@ function check(name, cond, detail) {
         base: (document.querySelector('input[name="base"]:checked') || {}).value,
         total: document.getElementById('out-total').textContent.trim()
       }));
-      check(`[${tag}] best-value build sets calculator`, st0.core === 'hq6' && st0.topper === 'ego2' && st0.base === 'low' && st0.total === '$461.47', JSON.stringify(st0));
+      check(`[${tag}] best-value build sets calculator`, st0.core === 'valevag' && st0.topper === 'ego2' && st0.base === 'low' && st0.total === '$644.49', JSON.stringify(st0));
 
       // Privacy: no personal anecdote text anywhere (incl SVG docs fetched)
       const bodyText = await page.evaluate(() => document.body.innerText);
-      const banned = ['$200', 'unwanted firm mattress', 'best-bed', 'Why modular wins', 'my best', 'I already had'];
+      const banned = ['$200', 'unwanted firm mattress', 'best-bed', 'Why modular wins', 'my best', 'I already had', 'foambymail'];
       const hits = banned.filter(s => bodyText.includes(s));
       check(`[${tag}] no personal anecdote`, hits.length === 0, `hits=${JSON.stringify(hits)}`);
       const svgTexts = await page.evaluate(async () => {

@@ -175,6 +175,9 @@ footer p{color:var(--faint);font-size:.85rem;margin:0}
   .tier{grid-template-columns:1fr}
 }
 @media (max-width:560px){
+  .tier{grid-template-columns:1fr 1fr;gap:.15rem .6rem}
+  .tier li{font-size:.82rem}
+@media (max-width:560px){
   body{font-size:15px}
   section{margin:.9rem 0}
   .hero{padding:.5rem 0 0}

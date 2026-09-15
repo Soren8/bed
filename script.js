@@ -3,9 +3,6 @@ var CORES = {
   lux4: { label: 'Lux-Regular 4"', price: 129.99, coverIncluded: false },
   lux5: { label: 'Lux-Regular 5"', price: 161.99, coverIncluded: false },
   lux6: { label: 'Lux-Regular 6"', price: 193.99, coverIncluded: false },
-  hq4:  { label: 'Lux-HQ 4"', price: 167.99, coverIncluded: false },
-  hq5:  { label: 'Lux-HQ 5"', price: 208.99, coverIncluded: false },
-  hq6:  { label: 'Lux-HQ 6"', price: 250.99, coverIncluded: false },
   valevag: { label: 'IKEA VALEVAG extra-firm', price: 499.00, coverIncluded: true },
   latex: { label: 'Latex Essential 6"', price: 1249.00, coverIncluded: true },
   ikea: { label: 'IKEA ASBYGDA firm', price: 349.00, coverIncluded: true }
